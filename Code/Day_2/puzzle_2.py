@@ -13,14 +13,17 @@ for i in range(len(games)):
 
         for dice in range(len(pull)):
             dice_values = list(pull[dice].split(" "))
-            if game_pulls[dice_values[1]] >= int(dice_values[0]) or game_pulls[dice_values[1]] == 0:
+            if game_pulls[dice_values[1]] < int(dice_values[0]):
                 game_pulls[dice_values[1]] = int(dice_values[0])
     print(dice_pulls)
     print(game_pulls)
     lowest_values.append([game_pulls["red"], game_pulls["green"], game_pulls["blue"]])
 sum_of_powers = 0
-for i in lowest_values:
-    sum_of_powers += i[0] * i[1] * i[2]
+print(len(lowest_values))
+for i in range(len(lowest_values)):
+    power = lowest_values[i][0] * lowest_values[i][1] * lowest_values[i][2]
+    print(i + 1, lowest_values[i], power)
+    sum_of_powers += power
 print(sum_of_powers)
 
 
