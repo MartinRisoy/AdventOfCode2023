@@ -1,0 +1,2 @@
+variable = "."
+print(variable.isalnum())
