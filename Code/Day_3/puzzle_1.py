@@ -2,8 +2,6 @@ import more_itertools as mit
 file = open("engine_schematic.txt", "r")
 rows = file.readlines()
 # stuff =  if (not c.isalnum() and (c != "." and c != r"\n")
-part_number = ""
-part_numbers = []
 char_pos = []
 num_pos = []
 for i in range(len(rows)):
@@ -33,10 +31,21 @@ for i in num_pos:
     if any(j for j in i if j in templist):
         temp2.append(i)
 
-
 print(temp2)
 
-for i in temp2:
-    for j in i:
-        print((j % 141) - 1)
-
+part_number = ""
+part_numbers = []
+for i in range(len(rows)):
+    row = rows[i]
+    part_number = ""
+    for j in range(len(row)):
+        character = row[j]
+        if any(((i * 140) + (j + 1)) in number for number in temp2):
+            part_number += character
+            try:
+                if not row[j + 1].isnumeric() and character.isnumeric():
+                    part_numbers.append(int(part_number))
+                    part_number = ""
+            except IndexError:
+                pass
+print(sum(part_numbers))
